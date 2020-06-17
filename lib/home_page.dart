@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+
+import 'switch_button.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,17 +9,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _dec = 0;
-  TextEditingController _controller = TextEditingController();
+  // Variables for each button
+  var _v1;
+  var _v2;
+  var _v3;
+  var _v4;
+  var _v5;
+  var _v6;
+  var _v7;
+  var _v8;
 
   @override
   Widget build(BuildContext context) {
-    _controller.addListener(() {
-      setState(() {
-        _dec = int.parse(_controller.text, radix: 2);
-      });
-      _controller.selection = TextSelection.fromPosition(TextPosition(offset: _controller.text.length));
-    });
+    var _dec = int.parse('$_v1$_v2$_v3$_v4$_v5$_v6$_v7$_v8', radix: 2);
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -44,24 +47,35 @@ class _HomePageState extends State<HomePage> {
               size: 120,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          Center(
-            child: TextField(
-              controller: _controller,
-              keyboardType: TextInputType.number,
-              maxLength: 8,
-              maxLines: 1,
-              inputFormatters: [
-                WhitelistingTextInputFormatter(RegExp('[0-1]'))
-              ],
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          Text('Press buttons below to switch binary digits (0-1)!'),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+          Flex(
+            direction: Axis.horizontal,
+            children: [
+              SwitchButton(onValueSwitch: (v1) => setState(() => _v1 = v1)),
+              SwitchButton(onValueSwitch: (v2) => setState(() => _v2 = v2)),
+              SwitchButton(onValueSwitch: (v3) => setState(() => _v3 = v3)),
+              SwitchButton(onValueSwitch: (v4) => setState(() => _v4 = v4)),
+              SwitchButton(onValueSwitch: (v5) => setState(() => _v5 = v5)),
+              SwitchButton(onValueSwitch: (v6) => setState(() => _v6 = v6)),
+              SwitchButton(onValueSwitch: (v7) => setState(() => _v7 = v7)),
+              SwitchButton(onValueSwitch: (v8) => setState(() => _v8 = v8)),
+            ],
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.075),
+          Text(
+            'Decimal:',
+            style: TextStyle(
+              fontSize: 30,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
           Center(
             child: Text(
-              _dec != null ? _dec.toString() : 'nada',
+              (_dec != null) ? _dec.toString() : 'Nothing',
               style: TextStyle(
-                fontSize: 25,
+                fontSize: 40,
               ),
             ),
           ),
