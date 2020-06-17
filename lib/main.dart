@@ -11,10 +11,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Bin2Dec',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
+        scaffoldBackgroundColor: Colors.grey[800],
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: TextTheme(bodyText2: TextStyle(color: Colors.white)),
       ),
       home: HomePage(),
     );
