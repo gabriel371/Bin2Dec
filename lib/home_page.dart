@@ -10,14 +10,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Variables for each button
-  var _v1;
-  var _v2;
-  var _v3;
-  var _v4;
-  var _v5;
-  var _v6;
-  var _v7;
-  var _v8;
+  var _v1 = 0;
+  var _v2 = 0;
+  var _v3 = 0;
+  var _v4 = 0;
+  var _v5 = 0;
+  var _v6 = 0;
+  var _v7 = 0;
+  var _v8 = 0;
 
   @override
   Widget build(BuildContext context) {
