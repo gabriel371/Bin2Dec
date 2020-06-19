@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
 import 'switch_button.dart';
@@ -25,20 +26,26 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(
-        title: Text('Bin2Dec'),
-        centerTitle: true,
-        elevation: 6,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.help_outline),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Bin2Dec',
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           Center(
             child: Icon(
@@ -48,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-          Text('Press buttons below to switch binary digits (0-1)!'),
+          Text('Press buttons below to switch binary digits (0-1)'),
           SizedBox(height: MediaQuery.of(context).size.height * 0.025),
           Flex(
             direction: Axis.horizontal,
@@ -71,11 +78,42 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-          Center(
-            child: Text(
-              (_dec != null) ? _dec.toString() : 'Nothing',
-              style: TextStyle(
-                fontSize: 40,
+          Builder(
+            builder: (ctx) => Center(
+              child: GestureDetector(
+                child: Container(
+                  height: 90,
+                  width: 75,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Theme.of(context).accentColor,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      (_dec != null) ? _dec.toString() : 'Nothing',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                onLongPress: () {
+                  Clipboard.setData(ClipboardData(text: _dec.toString()));
+                  Scaffold.of(ctx).showSnackBar(
+                    SnackBar(
+                      content: Text('Decimal ${_dec.toString()} copied to Clipboard'),
+                      duration: Duration(milliseconds: 2500),
+                    ),
+                  );
+                },
               ),
             ),
           ),
